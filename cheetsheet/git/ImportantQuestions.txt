@@ -1,0 +1,163 @@
+GIT INTERVIEW CHEAT-SHEET - IMPORTANT QUESTIONS
+
+==================================================
+🧠 GIT INTERVIEW NOTES & TIPS (DEVELOPER)
+==================================================
+
+===============================
+1️⃣ GIT BASICS
+===============================
+
+Q: What is Git?
+A: Git is a distributed version control system to track changes in code.
+
+Q: Difference between Git and GitHub?
+A: Git = VCS tool; GitHub = cloud hosting service for Git repositories.
+
+Q: What is a commit?
+A: A snapshot of staged changes, stored permanently in Git history.
+
+Q: Difference between local and remote repository?
+A: Local: on your machine. Remote: hosted on server (GitHub, GitLab, etc.).
+
+===============================
+2️⃣ BRANCHING & MERGING
+===============================
+
+Q: How to create and switch branches?
+A: git checkout -b branch_name
+
+Q: Difference between git merge and git rebase?
+A: Merge → combine branches, keeps history.
+Rebase → replay commits, cleaner linear history.
+
+Q: Fast-forward merge?
+A: Branch can be moved forward without creating a merge commit.
+
+Q: Conflict resolution?
+A: Happens when same lines changed in different branches. Resolve manually and commit.
+
+===============================
+3️⃣ STAGING & COMMITTING
+===============================
+
+Q: Difference between git add and git commit?
+A: git add → stage changes
+git commit → save staged changes in repo
+
+Q: git commit -m vs git commit --amend?
+A: -m → new commit
+--amend → modify last commit message or content
+
+Q: Difference between git reset, git revert, git checkout?
+A: reset → move HEAD, can unstage or delete commits
+revert → create commit that undoes previous commit
+checkout → switch branch or restore file
+
+===============================
+4️⃣ REMOTE REPOSITORIES
+===============================
+
+Q: git fetch vs git pull?
+A: fetch → only downloads changes
+pull → fetch + merge
+
+Q: git push vs git push --force?
+A: push → normal push
+force → overwrite remote branch, risky on shared branches
+
+Q: How to clone a repository?
+A: git clone <repo-url>
+
+===============================
+5️⃣ STASHING & RECOVERY
+===============================
+
+Q: What is git stash?
+A: Temporarily saves changes without committing.
+
+Q: Recover deleted commits?
+A: git reflog → shows all HEAD movements
+git checkout <commit> → recover commit
+
+Q: git clean?
+A: Remove untracked files:
+git clean -n → preview
+git clean -f → delete
+
+===============================
+6️⃣ TAGGING & VERSIONING
+===============================
+
+Q: Difference between lightweight and annotated tags?
+A: Lightweight → just a name
+Annotated → stores metadata (author, date, message)
+
+Q: How to push tags to remote?
+A: git push origin <tag-name>
+
+===============================
+7️⃣ COLLISION & HISTORY MANAGEMENT
+===============================
+
+Q: What is a detached HEAD?
+A: HEAD points directly to commit, not branch. Changes may be lost if not handled.
+
+Q: Difference between squash and fixup commits?
+A: squash → combines commits with message
+fixup → combines commits, discards commit message
+
+Q: Git bisect?
+A: Binary search to find commit that introduced a bug.
+
+===============================
+8️⃣ COMMON INTERVIEW QUESTIONS
+===============================
+
+Q: How does Git handle conflicts?
+A: Manual merge required; resolved conflicts must be staged & committed.
+
+Q: Explain difference: Git vs SVN?
+A: Git → distributed, each dev has full history
+SVN → centralized, requires server connection
+
+Q: When to use rebase over merge?
+A: Clean linear history, avoid multiple merge commits in feature branch.
+
+Q: How to undo pushed commit?
+A: git revert <commit> → safe
+git reset + force push → risky
+
+Q: What is the difference between origin and upstream?
+A: origin → your fork/clone remote
+upstream → original repository (main source)
+
+===============================
+9️⃣ BEST PRACTICES
+===============================
+
+✔ Always check git status before operations
+✔ Commit small, logical changes
+✔ Use meaningful commit messages
+✔ Pull before pushing to avoid conflicts
+✔ Avoid force push on shared branches
+✔ Use branches for features, fixes, releases
+✔ Stash changes before switching branches if necessary
+
+===============================
+🔟 TOPIC-WISE PRACTICE
+===============================
+
+1. Git commands mastery: status, add, commit, push, pull, fetch
+2. Branching & merging: merge conflicts, fast-forward, rebase
+3. Undo operations: reset, revert, checkout
+4. Remote collaboration: fork, clone, upstream, origin
+5. Stashing & cleaning: git stash, git clean
+6. Tagging & releases: lightweight vs annotated tags
+7. History inspection: log, show, reflog, bisect
+8. Git internals: HEAD, index, staging area
+9. Version control best practices: commit hygiene, branching strategy
+
+==================================================
+END OF GIT INTERVIEW NOTES
+==================================================

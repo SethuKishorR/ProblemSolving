@@ -1,0 +1,183 @@
+Java Collections – Key Interview Points (Comprehensive)
+
+1. Size vs Capacity
+Size = number of elements
+Capacity = internal storage
+
+2. Default Load Factor
+HashMap default = 0.75
+
+3. When HashMap Resizes
+Resize occurs when size > capacity * loadFactor
+
+4. HashMap Collision Handling
+< Java 8 : Linked List in bucket
+Java 8+ : Red-Black Tree when bucket length > 8
+
+5. Why TreeMap is Slower
+O(log n) due to Red-Black Tree balancing
+
+6. Comparable vs Comparator
+Comparable → natural ordering
+Comparator → custom ordering
+
+7. Why Map is Not a Collection
+Stores key-value pairs
+Does NOT extend Collection interface
+
+8. Fail-Fast
+Throws ConcurrentModificationException
+Examples: ArrayList, HashMap, HashSet
+
+9. Fail-Safe
+Works on a copy → no exception
+Examples: ConcurrentHashMap, CopyOnWriteArrayList
+
+10. Legacy Classes
+Vector → ArrayList
+Hashtable → HashMap
+Stack → ArrayDeque
+
+11. Why ArrayDeque > Stack
+Stack is synchronized → slow
+ArrayDeque is faster, modern alternative
+
+12. Immutable Collections (Java 9+)
+List.of(), Set.of(), Map.of() → immutable, nulls NOT allowed
+
+13. Null Rules
+HashMap → 1 null key, multiple null values
+HashSet → 1 null element
+TreeMap / TreeSet → no null (natural sorting)
+
+14. equals() & hashCode()
+Must be consistent
+Used to identify duplicate keys
+
+15. HashMap vs ConcurrentHashMap
+HashMap → not thread-safe
+ConcurrentHashMap → thread-safe, bucket-level locking
+
+16. Iterator vs ListIterator
+Iterator → forward only
+ListIterator → forward & backward (List only)
+
+17. WeakHashMap (Concept)
+Keys removed when no strong reference exists
+Used in caching scenarios
+
+18. Insertion Order Maintained
+ArrayList, LinkedList, LinkedHashMap, LinkedHashSet
+
+19. Sorted Order Maintained
+TreeSet, TreeMap
+
+20. Best for Frequent Reads
+ArrayList
+
+21. Best for Insert/Delete
+LinkedList
+
+22. Best for Fast Lookup
+HashMap
+
+23. Best for Sorted Keys
+TreeMap
+
+24. Best Usage Thumb Rule
+ArrayList → Read-heavy
+LinkedList → Insert/Delete-heavy
+HashMap → Fast lookup
+TreeMap → Sorted keys
+LinkedHashMap → Insertion order + near HashMap speed
+
+25. Performance Complexity
+ArrayList → O(1) get, O(n) add/remove (middle)
+LinkedList → O(n) get, O(1) add/remove (ends)
+HashMap → O(1) get/put (avg), O(n) worst
+TreeMap → O(log n) get/put
+HashSet → O(1) add/remove (avg)
+TreeSet → O(log n) add/remove
+
+26. HashMap Internal Structure
+Buckets, array + linked lists (pre-Java 8)
+Buckets, array + tree (Java 8+ if bucket > 8)
+
+27. TreeMap Internal Structure
+Red-Black Tree → self-balancing, sorted keys
+
+28. LinkedHashMap Ordering
+Maintains insertion order or access order (LRU caches)
+
+29. HashMap Resize / Rehash
+Double array size, rehash all keys
+O(n) amortized
+
+30. ArrayList Resize
+(3/2 * oldCapacity) + 1 → amortized O(1) per insert
+
+31. Thread-Safe Versions
+Vector → synchronized ArrayList
+Hashtable → synchronized HashMap
+Collections.synchronizedList/Set/Map → wrapper for sync
+
+32. CopyOnWrite Collections
+CopyOnWriteArrayList, CopyOnWriteArraySet
+Iterators are fail-safe → good for concurrent read-heavy scenarios
+
+33. Weak References
+WeakHashMap → keys removed when not strongly referenced
+Useful for caches / memory-sensitive objects
+
+34. Navigable Collections
+TreeMap / TreeSet → floor(), ceiling(), higher(), lower(), pollFirst(), pollLast()
+
+35. Queue Interfaces
+Queue, Deque → LinkedList, ArrayDeque implementations
+PriorityQueue → min-heap based priority queue
+
+36. Stack Replacement
+Use ArrayDeque instead of legacy Stack → faster, modern API
+
+37. Null Handling Differences
+HashMap → 1 null key, multiple null values
+HashSet → 1 null element
+TreeMap / TreeSet → null not allowed if using natural ordering
+
+38. Iteration Order Differences
+HashMap → no order
+LinkedHashMap → insertion order
+TreeMap → sorted order
+
+39. Fail-Fast vs Fail-Safe Internals
+Fail-Fast → detects concurrent modification → throws exception
+Fail-Safe → operates on cloned snapshot → no exception
+
+40. Java 8+ Stream Support
+Collections → stream(), parallelStream() → functional operations
+
+41. Common Interview Code Patterns
+- Remove duplicates from list → use Set
+- Sort by custom comparator → Collections.sort() / TreeSet
+- Frequency count → HashMap with counting
+- LRU cache → LinkedHashMap with access order
+
+42. Common Tricky Questions
+- Modify collection during iteration → fail-fast behavior
+- HashCode collisions → impact on performance
+- Concurrent modifications → thread-safety issues
+- Difference between identity and equality → equals() vs ==
+
+43. Big Company Hot Topics
+- ArrayList vs LinkedList performance nuances
+- HashMap internal mechanics, resizing, and collision handling
+- TreeMap/TreeSet Red-Black Tree and ordering
+- Fail-Fast vs Fail-Safe iterator behavior
+- ConcurrentHashMap / CopyOnWriteArrayList threading
+- Null handling differences across collections
+- Immutable collections usage (Java 9+)
+- Iteration order (HashMap vs LinkedHashMap vs TreeMap)
+- LRU Cache using LinkedHashMap
+- PriorityQueue / Queue operations
+- WeakHashMap caching scenario
+- Load factor and expansion impact on performance
