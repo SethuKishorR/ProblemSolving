@@ -1,0 +1,179 @@
+CHEAT-SHEET - GIT (https://git-scm.com/cheat-sheet)
+
+==================================================
+🧠 GIT COMPLETE NOTES WITH EXAMPLES (DEVELOPER)
+==================================================
+
+===============================
+1️⃣ CHECK CURRENT STATE
+===============================
+
+git status
+- Shows modified files, staged/unstaged
+
+git diff
+- Shows exact line changes in files
+
+git diff --name-only
+- Shows file names with changes
+Example Output:
+fileA.java
+fileB.java
+
+git diff --cached
+- Shows changes staged for next commit
+
+===============================
+2️⃣ STAGING & COMMITTING
+===============================
+
+git add fileA.java
+- Stage a single file
+
+git add .
+- Stage all modified files
+
+git commit -m "Commit message"
+- Create commit with staged changes
+
+git push
+- Push commits to remote repository
+
+===============================
+3️⃣ VIEW COMMIT HISTORY
+===============================
+
+git log --oneline
+- Shows commit history briefly
+Example:
+a12bc34 Fix login bug
+d45ef67 Add validation
+
+git show HEAD
+- Shows last commit details & changes
+
+git log --oneline origin/main..HEAD
+- Shows commits not yet pushed
+
+===============================
+4️⃣ UNDO LOCAL COMMITS (NOT PUSHED)
+===============================
+
+git reset --soft HEAD~1
+- Undo last commit, keep changes staged
+
+git reset HEAD~1
+- Undo last commit, unstage changes
+
+git reset --hard HEAD~1
+⚠️ Deletes commit + code
+- Use only if sure
+
+===============================
+5️⃣ UNDO PUSHED COMMITS (SAFE)
+===============================
+
+git revert HEAD
+- Create new commit that reverses last commit
+
+git revert a12bc34
+- Revert a specific commit
+
+===============================
+6️⃣ BRANCHING
+===============================
+
+git branch
+- List all branches
+
+git checkout -b feature/login
+- Create & switch to new branch
+
+git checkout main
+- Switch back to main branch
+
+===============================
+7️⃣ MERGE & REBASE
+===============================
+
+git merge feature/login
+- Merge branch into current branch
+
+git rebase -i HEAD~3
+- Clean last 3 commits interactively
+Commands:
+pick   -> keep
+drop   -> remove
+squash -> combine
+
+git push --force
+⚠️ Use only on your own branch
+
+===============================
+8️⃣ STASHING
+===============================
+
+git stash
+- Temporarily save changes
+
+git stash list
+- List all stashed changes
+
+git stash pop
+- Restore stashed changes
+
+===============================
+9️⃣ FILE RECOVERY
+===============================
+
+git restore fileA.java
+- Discard changes in a file
+
+git restore --staged fileA.java
+- Unstage a file
+
+git reflog
+- Recover lost commits
+
+===============================
+🔟 CHERRY-PICK & TAGS
+===============================
+
+git cherry-pick a12bc34
+- Apply a specific commit from another branch
+
+git tag v1.0.0
+- Create a tag for release
+
+git push origin v1.0.0
+- Push tag to remote
+
+===============================
+1️⃣1️⃣ CLEANUP & SYNC
+===============================
+
+git fetch
+- Fetch remote changes only
+
+git pull
+- Fetch + merge remote changes
+
+git clean -n
+- Preview untracked files to delete
+
+git clean -f
+- Delete untracked files
+
+===============================
+GOLDEN RULES
+===============================
+
+✔ Always check git status before any operation
+✔ Use revert for pushed commits
+✔ Use reset for local commits
+✔ Avoid force push on shared branches
+✔ Git is recoverable; mistakes can usually be fixed
+
+==================================================
+END OF NOTES
+==================================================
