@@ -1,0 +1,477 @@
+https://www.youtube.com/watch?v=VsbSZwTekoE&t=246s
+
+HASHMAP INTERNAL WORKING – COMPLETE NOTES (JAVA)
+
+----------------------------------------------------
+1) WHAT IS HASHMAP?
+----------------------------------------------------
+- HashMap is a Map implementation in Java.
+- Stores data as Key–Value pairs.
+- Keys must be unique.
+- Values can be duplicated.
+- Not thread-safe.
+- Does NOT maintain insertion order.
+
+----------------------------------------------------
+2) INTERNAL DATA STRUCTURE
+----------------------------------------------------
+- Internally, HashMap uses an array of buckets:
+
+    Node<K, V>[] table;
+
+- Each bucket stores exactly ONE of the following:
+    - Linked List (Java 7)
+    - Linked List or Red-Black Tree (Java 8+)
+
+Each Node contains:
+    - int hash
+    - K key
+    - V value
+    - Node<K,V> next
+
+----------------------------------------------------
+3) HASHCODE AND EQUALS (VERY IMPORTANT)
+----------------------------------------------------
+- hashCode():
+    Used to determine the bucket index.
+
+- equals():
+    Used to compare keys within the same bucket.
+
+Rules:
+- Same hashCode → equals() is checked
+- equals() == true → value is replaced
+- equals() == false → collision → new node added
+
+----------------------------------------------------
+4) HOW BUCKET INDEX IS CALCULATED
+----------------------------------------------------
+Java 8+ calculation:
+
+    index = hash & (capacity - 1)
+
+Example:
+Capacity = 8
+capacity - 1 = 7 (binary: 0111)
+
+Key = 9
+hashCode(9) = 9 (binary: 1001)
+
+index = 1001 & 0111 = 0001 = 1
+
+----------------------------------------------------
+5) COLLISION HANDLING (CHAINING)
+----------------------------------------------------
+Collision:
+- When multiple keys map to the same bucket index.
+
+Example Keys:
+    1, 9, 17
+
+Capacity = 8
+
+Index calculation:
+    1  & 7 = 1
+    9  & 7 = 1
+    17 & 7 = 1
+
+Bucket 1:
+    1 → 9 → 17
+
+Important:
+- Each bucket has ONLY ONE linked list.
+- That linked list stores multiple KEY–VALUE pairs.
+
+Java 8+ Optimization:
+- If a bucket has > 8 nodes
+- AND capacity ≥ 64
+→ Linked List converts to Red-Black Tree.
+
+----------------------------------------------------
+6) DEFAULT CAPACITY AND LOAD FACTOR
+----------------------------------------------------
+Default Capacity: 16
+Default Load Factor: 0.75
+
+Threshold:
+    threshold = capacity × loadFactor
+
+Example:
+    16 × 0.75 = 12
+
+Resize condition:
+    size > threshold
+
+----------------------------------------------------
+7) RESIZING (REHASHING) – CORRECT LOGIC
+----------------------------------------------------
+IMPORTANT:
+- Resizing is triggered by SIZE, NOT by collisions.
+
+When resizing:
+- Capacity doubles.
+- HashCode is NOT recalculated.
+- Bit logic is used for redistribution.
+
+Rule:
+    New index is either:
+        oldIndex
+        OR
+        oldIndex + oldCapacity
+
+Example:
+Old Capacity = 8
+New Capacity = 16
+
+Keys in Bucket 6:
+    6, 14, 22, 30
+
+Binary decision:
+    6  & 8  = 0 → stays at 6
+    14 & 8  = 8 → moves to 14
+    22 & 8  = 0 → stays at 6
+    30 & 8  = 8 → moves to 14
+
+After Resize:
+    Bucket 6:  6 → 22
+    Bucket 14: 14 → 30
+
+----------------------------------------------------
+8) CLASSIC COLLISION + RESIZE EXAMPLE (FROM VIDEO)
+----------------------------------------------------
+Keys:
+    1, 9, 17
+
+Initial Capacity = 8
+
+Bucket Structure:
+    Bucket 1: 1 → 9 → 17
+
+Why collision?
+    All keys map to same bucket.
+
+After Resize (8 → 16):
+
+    1  & 15 = 1  → Bucket 1
+    9  & 15 = 9  → Bucket 9
+    17 & 15 = 1  → Bucket 1
+
+After Resize Buckets:
+    Bucket 1:  1 → 17
+    Bucket 9:  9
+
+Observations:
+- Resize redistributes entries.
+- Collisions may still exist.
+- Resize reduces collisions but does NOT eliminate them.
+
+----------------------------------------------------
+9) INSERTION PROCESS (put)
+----------------------------------------------------
+1. Compute hashCode
+2. Calculate index
+3. If bucket empty → insert
+4. If bucket not empty:
+    - Compare hash
+    - If equals() true → replace value
+    - Else → add new node
+5. Check size > threshold
+6. Resize if needed
+
+----------------------------------------------------
+10) RETRIEVAL PROCESS (get)
+----------------------------------------------------
+1. Compute hashCode
+2. Calculate index
+3. Go to bucket
+4. Traverse list / tree
+5. Use equals()
+6. Return value
+
+----------------------------------------------------
+11) IMPORTANT FACTS
+----------------------------------------------------
+- Integer.hashCode(x) = x
+- One bucket = ONE linked list (or tree)
+- Collisions are NORMAL.
+- No resize → collisions remain.
+- Resize → collisions often reduce.
+
+Time Complexity:
+    Average: O(1)
+    Worst: O(n) → List
+           O(log n) → Tree
+
+----------------------------------------------------
+12) INTERVIEW MENTAL MODEL (MUST REMEMBER)
+----------------------------------------------------
+👉 Resizing is triggered by SIZE, not collisions.
+👉 Resizing often reduces collisions.
+👉 Collisions may still remain after resize.
+👉 If resize does not happen, collisions stay.
+
+----------------------------------------------------
+13) INTERVIEW ONE-LINERS
+----------------------------------------------------
+- HashMap uses hashing + chaining.
+- hashCode decides bucket, equals decides identity.
+- Each bucket stores one linked list or tree.
+- Resize happens at 75% capacity.
+- Java 8 optimizes collisions using Red-Black Tree.
+
+
+========================================================
+Example:
+========================================================
+HASHMAP RESIZE EXPLANATION (0–30)
+Initial Capacity = 8
+========================================================
+
+
+FORMULA USED BY HASHMAP
+----------------------
+index = hash & (capacity - 1)
+
+Assumption:
+hash(key) = key   (true for Integer)
+
+Initial Capacity = 8
+capacity - 1 = 7  → binary: 0111
+
+
+--------------------------------------------------------
+STEP 1: INSERT KEYS 0–30 (CAPACITY = 8)
+--------------------------------------------------------
+
+index = key & 7
+
+Binary reminder:
+7  = 0111
+
+Key  Binary     key & 7   Bucket
+--------------------------------
+0    00000      00000     0
+1    00001      00001     1
+2    00010      00010     2
+3    00011      00011     3
+4    00100      00100     4
+5    00101      00101     5
+6    00110      00110     6
+7    00111      00111     7
+
+8    01000      00000     0   (collision)
+9    01001      00001     1
+10   01010      00010     2
+11   01011      00011     3
+12   01100      00100     4
+13   01101      00101     5
+14   01110      00110     6
+15   01111      00111     7
+
+16   10000      00000     0
+17   10001      00001     1
+18   10010      00010     2
+19   10011      00011     3
+20   10100      00100     4
+21   10101      00101     5
+22   10110      00110     6
+23   10111      00111     7
+
+24   11000      00000     0
+25   11001      00001     1
+26   11010      00010     2
+27   11011      00011     3
+28   11100      00100     4
+29   11101      00101     5
+30   11110      00110     6
+
+
+--------------------------------------------------------
+BUCKETS BEFORE RESIZE (CAPACITY = 8)
+--------------------------------------------------------
+
+Bucket 0:  0 → 8 → 16 → 24
+Bucket 1:  1 → 9 → 17 → 25
+Bucket 2:  2 → 10 → 18 → 26
+Bucket 3:  3 → 11 → 19 → 27
+Bucket 4:  4 → 12 → 20 → 28
+Bucket 5:  5 → 13 → 21 → 29
+Bucket 6:  6 → 14 → 22 → 30
+Bucket 7:  7 → 15 → 23
+
+
+========================================================
+STEP 2: RESIZE HAPPENS
+New Capacity = 16
+Old Capacity = 8
+========================================================
+
+IMPORTANT:
+HashMap DOES NOT recompute (key & 15)
+
+It checks ONLY ONE BIT:
+key & oldCapacity
+
+oldCapacity = 8 → binary 1000
+
+
+--------------------------------------------------------
+STEP 3: SPLITTING EACH BUCKET (8 → 16)
+--------------------------------------------------------
+
+Rule:
+if (key & 8) == 0  → stays in same bucket
+if (key & 8) != 0  → moves to bucket (oldIndex + 8)
+
+
+Example: Bucket 0
+-----------------
+Keys: 0, 8, 16, 24
+
+0  & 8 = 0   → stays at 0
+8  & 8 = 8   → moves to 8
+16 & 8 = 0   → stays at 0
+24 & 8 = 8   → moves to 8
+
+
+Example: Bucket 6
+-----------------
+Keys: 6, 14, 22, 30
+
+6  & 8 = 0   → stays at 6
+14 & 8 = 8   → moves to 14
+22 & 8 = 0   → stays at 6
+30 & 8 = 8   → moves to 14
+
+
+--------------------------------------------------------
+BUCKETS AFTER RESIZE (CAPACITY = 16)
+--------------------------------------------------------
+
+Bucket 0:   0 → 16
+Bucket 1:   1 → 17
+Bucket 2:   2 → 18
+Bucket 3:   3 → 19
+Bucket 4:   4 → 20
+Bucket 5:   5 → 21
+Bucket 6:   6 → 22
+Bucket 7:   7 → 23
+
+Bucket 8:   8 → 24
+Bucket 9:   9 → 25
+Bucket 10:  10 → 26
+Bucket 11:  11 → 27
+Bucket 12:  12 → 28
+Bucket 13:  13 → 29
+Bucket 14:  14 → 30
+Bucket 15:  15
+
+
+========================================================
+STEP 4: NEXT RESIZE HAPPENS
+New Capacity = 32
+Old Capacity = 16
+========================================================
+
+IMPORTANT:
+HashMap checks ONE BIT only:
+key & oldCapacity
+
+oldCapacity = 16 → binary 10000
+
+Rule:
+if (key & 16) == 0  → stays in same bucket
+if (key & 16) != 0  → moves to bucket (oldIndex + 16)
+
+
+--------------------------------------------------------
+STEP 5: SPLITTING EACH BUCKET (16 → 32)
+--------------------------------------------------------
+
+Example: Bucket 0
+-----------------
+Keys: 0, 16
+
+0  & 16  = 0  → stays at 0
+16 & 16  = 16 → moves to 0 + 16 = 16
+
+
+Example: Bucket 6
+-----------------
+Keys: 6, 22
+
+6  & 16  = 0   → stays at 6
+22 & 16 = 16  → moves to 6 + 16 = 22
+
+
+Example: Bucket 8
+-----------------
+Keys: 8, 24
+
+8  & 16  = 0   → stays at 8
+24 & 16 = 16  → moves to 8 + 16 = 24
+
+
+Example: Bucket 14
+-----------------
+Keys: 14, 30
+
+14 & 16 = 0   → stays at 14
+30 & 16 = 16  → moves to 14 + 16 = 30
+
+
+--------------------------------------------------------
+BUCKETS AFTER RESIZE (CAPACITY = 32)
+--------------------------------------------------------
+
+Bucket 0:   0
+Bucket 1:   1
+Bucket 2:   2
+Bucket 3:   3
+Bucket 4:   4
+Bucket 5:   5
+Bucket 6:   6
+Bucket 7:   7
+
+Bucket 8:   8
+Bucket 9:   9
+Bucket 10:  10
+Bucket 11:  11
+Bucket 12:  12
+Bucket 13:  13
+Bucket 14:  14
+Bucket 15:  15
+
+Bucket 16:  16
+Bucket 17:  17
+Bucket 18:  18
+Bucket 19:  19
+Bucket 20:  20
+Bucket 21:  21
+Bucket 22:  22
+Bucket 23:  23
+
+Bucket 24:  24
+Bucket 25:  25
+Bucket 26:  26
+Bucket 27:  27
+Bucket 28:  28
+Bucket 29:  29
+Bucket 30:  30
+Bucket 31:  (empty)
+
+
+========================================================
+FINAL NOTES
+========================================================
+
+- HashMap resizes **gradually**, doubling capacity each time
+- During resize, **only one bit (oldCapacity) decides split**
+- Buckets either **stay** or **move to oldIndex + oldCapacity**
+- No full recomputation of hash is needed
+- This explains why **power-of-2 capacity** is required
+
+Now for 31 elements (0–30):
+- Initial capacity 8 → resize to 16 after 7th element
+- Capacity 16 → resize to 32 after 13th element
+- Final capacity = 32, all elements fit safely
