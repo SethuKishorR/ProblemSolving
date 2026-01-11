@@ -7,7 +7,7 @@ This guide explains the internal bitwise logic used by Java's `HashMap` during t
 ## Core Formula
 HashMap determines the bucket index using the following bitwise operation:
 
-$$index = hash \& (capacity - 1)$$
+> index = hash \& (capacity - 1)
 
 > **Assumption:** For this example, we assume `hash(key) = key` (which is true for `Integer` in Java).
 
