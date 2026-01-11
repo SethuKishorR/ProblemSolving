@@ -1,0 +1,140 @@
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Parameter                 | Array     | ArrayList            | LinkedList     | ArrayDeque     | TreeSet     | HashSet     | LinkedHashSet  | HashMap           | TreeMap        |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Type                      | Legacy    | List                 | List           | Deque          | Set         | Set         | Set            | Map               | Map            |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Size                      | Fixed     | Dynamic              | Dynamic        | Dynamic        | Dynamic     | Dynamic     | Dynamic        | Dynamic           | Dynamic        |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Default Capacity          | Fixed     | 10                   | 0              | 16             | 0           | 16          | 16             | 16                | 0              |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Growth Formula            | N/A       | (3n/2)+1             | N/A            | 2n             | N/A         | 2n          | 2n             | 2n                | N/A            |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Internal DS               | Contiguous| Dynamic Arr          | Doubly LL      | Circular Arr   | Red-Black   | Hash Table  | HashTable + LL | Hash Table        | Red-Black      |
+|                           |           |                      |                |                | Tree        |             |                |                   | Tree           |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Stores                    | PDT + Obj | Objects              | Objects        | Objects        | Objects     | Objects     | Objects        | Key-Value         | Key-Value      |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Duplicates Allowed        | Yes       | Yes                  | Yes            | Yes            | No          | No          | No             | Keys: No          | Keys: No       |
+|                           |           |                      |                |                |             |             |                | Val: Yes          | Val: Yes       |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Null Allowed              | Yes       | Yes                  | Yes            | No             | No          | One Null    | One Null       | One Null Key      | No             |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Insertion Order           | Yes       | Yes                  | Yes            | Yes            | No          | No          | Yes            | No                | No             |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Sorted                    | No        | No                   | No             | No             | Yes         | No          | No             | No                | Yes            |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Sorting Basis             | N/A       | N/A                  | N/A            | N/A            | Natural/    | N/A         | N/A            | Key               | Natural/       |
+|                           |           |                      |                |                | Comparator  |             |                |                   | Comparator     |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Random Access             | Yes       | Yes                  | No             | Yes            | No          | No          | No             | No                | No             |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Traversal Direction       | Both      | Both                 | Both           | Both           | Both        | Forward     | Forward        | Forward           | Both           |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Iteration Complexity      | O(n)      | O(n)                 | O(n)           | O(n)           | O(n)        | O(n)        | O(n)           | O(n)              | O(n)           |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Fail-Fast / Fail-Safe     | N/A       | Fail-Fast            | Fail-Fast      | Fail-Fast      | Fail-Fast   | Fail-Fast   | Fail-Fast      | Fail-Fast         | Fail-Fast      |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Access Time               | O(1)      | O(1)                 | O(n)           | O(1)           | O(log n)    | O(1)        | O(1)           | O(1)              | O(log n)       |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Insert/Delete Time        | O(n)      | O(n)                 | O(1)           | O(1)           | O(log n)    | O(1)        | O(1)           | O(1)              | O(log n)       |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Memory Overhead           | Low       | Medium               | High           | Medium         | High        | Medium      | High           | Medium            | High           |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Thread Safe               | No        | No                   | No             | No             | No          | No          | No             | No                | No             |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Concurrent Version        | N/A       | CopyOnWriteArrayList | N/A            | N/A            | N/A         | N/A         | N/A            | ConcurrentHashMap | N/A            |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Resizing / Rehash         | N/A       | (3/2*n+1)            | N/A            | 2x array       | N/A         | 2x table    | 2x table       | 2x table          | N/A            |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Java Version Introduced   | Legacy    | 1.2                  | 1.2            | 1.6            | 1.2         | 1.2         | 1.4            | 1.2               | 1.2            |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Use-case Examples         | Fixed     | Dynamic lists        | Queue/Stack    | Stack/Queue    | Sorted      | Fast lookup | Ordered +      | Caching /         | Sorted map     |
+|                           | config    |                      |                |                | unique      |             | unique         | lookup            |                |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Common Methods            | get(),    | add(), get(),        | add(),         | addFirst(),    | add(),      | add(),      | add(),         | put(), get(),     | put(), get(),  |
+|                           | set()     | remove()             | get(),         | addLast(),     | remove(),   | remove(),   | remove(),      | remove()          | remove()       |
+|                           |           |                      | remove()       | poll()         | contains()  | contains()  | contains()     |                   |                |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Main Advantage            | Simple    | Fast reads           | Fast ins/del   | No size limit  | Always      | Fast ops    | Order          | Fast search       | Sorted keys    |
+|                           |           |                      |                |                | sorted      |             | preserved      |                   |                |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Main Disadvantage         | Fixed     | Slow ins             | Slow access    | No null elems  | Slower vs   | No order    | More memory    | No order          | Slower than    |
+|                           | size      |                      |                |                | HashSet     |             | usage          |                   | HashMap        |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Underlying Algorithm      | Contiguous| Array resizing       | Doubly Linked  | Circular buffer| Red-Black   | Hash Table  | HashTable+LL   | Hashing+Chaining  | Red-Black Tree |
+|                           |           | (amortized O(n))     | List           |                | Tree        |             |                |                   |                |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Synchronized Version      | N/A       | Collections.synch    | N/A            | N/A            | N/A         | N/A         | N/A            | ConcurrentMap     | ConcurrentMap  |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Iteration vs Random Acc.  | O(n)/O(1) | O(n)/O(1)            | O(n)/O(n)      | O(n)/O(1)      |O(n)/O(log n)| O(n)/O(1)   | O(n)/O(1)      | O(n)/O(1)         | O(n)/O(log n)  |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Null Handling Notes       | Simple    | Accepts nulls        | Accepts nulls  | Not allowed    | Not allowed | 1 null key  | 1 null key     | 1 null key        | Not allowed    |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Capacity Expansion Note   | N/A       | Expands (3/2*n+1)    | N/A            | Doubles        | N/A         | Doubles     | Doubles        | Doubles           | N/A            |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+| Space Complexity          | Low       | Medium               | High           | Medium         | High        | Medium      | High           | Medium            | High           |
++---------------------------+-----------+----------------------+----------------+----------------+-------------+-------------+----------------+-------------------+----------------+
+
+# Java Collections – When & Why to Use
+
+### 1. Array
+- When to use:
+  - Fixed-size collection of elements.
+  - Fast index-based access (O(1)).
+  - Minimal memory overhead.
+- Example topics: Storing constants, lookup tables, configuration values.
+
+### 2. ArrayList
+- When to use:
+  - Dynamic-sized array.
+  - Fast random access (O(1)).
+  - Iteration order matters.
+- Example topics: Lists of students, tasks, dynamic datasets.
+
+### 3. LinkedList
+- When to use:
+  - Frequent insertions/deletions at ends or in the middle.
+  - Sequential access preferred over random access.
+  - Implementing queue (FIFO) or stack (LIFO) operations.
+- Example topics: Task queues, undo-redo history, BFS traversal.
+
+### 4. ArrayDeque
+- When to use:
+  - Fast stack (push/pop) or queue operations.
+  - Resizable array, no null elements allowed.
+  - Better performance than LinkedList for deque operations.
+- Example topics: Task scheduling, BFS traversal, undo-redo stacks.
+
+### 5. TreeSet
+- When to use:
+  - Store sorted, unique elements automatically.
+  - Efficient O(log n) add/remove/search.
+  - Iterate in ascending (sorted) order.
+- Example topics: Sorted leaderboards, unique sorted IDs, ranking systems.
+
+### 6. HashSet
+- When to use:
+  - Store unique elements only.
+  - Fast add, remove, contains (O(1)).
+  - Order does not matter.
+- Example topics: Unique value collections, lookup sets, membership checks.
+
+### 7. LinkedHashSet
+- When to use:
+  - Store unique elements while maintaining insertion order.
+  - Fast add, remove, contains (O(1)).
+- Example topics: Caches, preserving order while removing duplicates, ordered sets.
+
+### 8. HashMap
+- When to use:
+  - Key-value pairs with fast access (O(1)).
+  - No ordering required.
+  - One null key and multiple null values allowed.
+- Example topics: Lookup tables, caching, frequency counts, dictionary-like mappings.
+
+### 9. TreeMap
+- When to use:
+  - Key-value pairs with keys sorted automatically (natural or comparator).
+  - Efficient log(n) access, insert, delete.
+  - Iteration order is consistent based on sorted keys.
+- Example topics: Leaderboard ranking, scheduled events, ordered dictionaries.
