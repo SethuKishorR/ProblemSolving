@@ -1,4 +1,4 @@
-package programs.hashing;
+package programs.hashing.code;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -12,7 +12,7 @@ import java.util.Scanner;
  * 5. It consumes more memory and is suitable only for small value ranges.
  * 6. For large datasets or negative values, prefer using HashMap.
  */
-public class ArrayHashing {
+public class IntegerArrayHashing {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);

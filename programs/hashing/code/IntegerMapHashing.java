@@ -1,4 +1,4 @@
-package programs.hashing;
+package programs.hashing.code;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -16,7 +16,7 @@ import java.util.Scanner;
  *   it allows direct access to both key and value without
  *   performing an additional lookup.
  */
-public class MapHashing {
+public class IntegerMapHashing {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
