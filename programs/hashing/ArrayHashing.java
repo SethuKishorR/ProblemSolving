@@ -34,8 +34,9 @@ public class ArrayHashing {
         }
 
         System.out.println("Entered array: " + Arrays.toString(arr));
-
         countFrequencyUsingArray(arr, input);
+
+        input.close();
     }
 
     /**
