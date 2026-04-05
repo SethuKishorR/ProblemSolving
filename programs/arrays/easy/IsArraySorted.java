@@ -24,8 +24,11 @@ public class IsArraySorted {
         int count = 0;
 
         for (int i = 0; i < n; i++) {
+            // Next index (circular comparison)
+            // When 'i' is the last index, next becomes 0
             int next = (i + 1) % n;
-
+            // If current element is greater than the next,
+            // it means the sorted order is broken (a "drop")
             if (nums[i] > nums[next]) {
                 count++;
                 if (count > 1) {
