@@ -1,8 +1,5 @@
 package freecodecamp.programs;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /*
  * Problem: Verifying an Alien Dictionary
  * Link: https://leetcode.com/problems/verifying-an-alien-dictionary/
@@ -22,26 +19,24 @@ import java.util.Map;
  *   (only 26 lowercase letters stored in map)
  */
 public class _9_VerifyingAnAlienDictionary {
-
-    private static final Map<Character, Integer> DICTIONARY = new HashMap<>();
-
     public static void main(String[] args) {
+        int[] input = new int[26];
         String[] words = {"hello", "leetcode"};
         String order = "hlabcdefgijkmnopqrstuvwxyz";
 
         // Build dictionary
         for (int i = 0; i < order.length(); i++) {
-            DICTIONARY.put(order.charAt(i), i);
+            input[order.charAt(i) - 'a'] = i;
         }
 
-        boolean result = isAlienSorted(words);
+        boolean result = isAlienSorted(words, input);
 
         System.out.println("Input  : " + String.join(", ", words));
         System.out.println("Order  : " + order);
         System.out.println("Output : " + result);
     }
 
-    public static boolean isAlienSorted(String[] words) {
+    public static boolean isAlienSorted(String[] words, int[] input) {
         for (int i = 0; i < words.length - 1; i++) {
             String str1 = words[i];
             String str2 = words[i + 1];
@@ -55,7 +50,7 @@ public class _9_VerifyingAnAlienDictionary {
 
                 if (ch1 != ch2) {
                     // If characters are different, compare using alien order
-                    if (DICTIONARY.get(ch1) > DICTIONARY.get(ch2)) {
+                    if (input[ch1 - 'a'] > input[ch2 - 'a']) {
                         return false;
                     }
                     // If order is correct, no need to check further characters
